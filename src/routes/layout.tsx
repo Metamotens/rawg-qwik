@@ -1,7 +1,7 @@
 import { component$, Slot } from "@builder.io/qwik";
 import type { RequestHandler } from "@builder.io/qwik-city";
 import { Header } from "~/components/Header/Header";
-import { Sidenav } from "~/components/Sidenav/Sidenav";
+import { Sidenav } from "~/components/sidenav/sidenav";
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
   // Control caching for this request for best performance and to reduce hosting costs:
@@ -18,7 +18,7 @@ export default component$(() => {
   return (
     <>
       <Header />
-      <div class="flex flex-row">
+      <div class="flex flex-row pb-10">
         <Sidenav />
         <Slot />
       </div>
