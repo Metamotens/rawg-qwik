@@ -1,7 +1,8 @@
 import { component$, Slot } from "@builder.io/qwik";
 import type { RequestHandler } from "@builder.io/qwik-city";
-import { Header } from "~/components/Header/Header";
+import { Header } from "~/components/header/header";
 import { Sidenav } from "~/components/sidenav/sidenav";
+import { GameProvider } from "~/providers/games.provider";
 
 export const onGet: RequestHandler = async ({ cacheControl }) => {
   // Control caching for this request for best performance and to reduce hosting costs:
@@ -16,12 +17,12 @@ export const onGet: RequestHandler = async ({ cacheControl }) => {
 
 export default component$(() => {
   return (
-    <>
+    <GameProvider>
       <Header />
       <div class="flex flex-row pb-10">
         <Sidenav />
         <Slot />
       </div>
-    </>
+    </GameProvider>
   );
 });
