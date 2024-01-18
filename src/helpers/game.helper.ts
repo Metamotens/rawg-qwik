@@ -11,6 +11,7 @@ enum PlatformImage {
     LINUX = 'icons/linux.svg',
     VITA = 'icons/vita.svg',
     WEB = 'icons/web.svg',
+    WII = 'icons/wii.svg',
 }
 
 export const getGamePlatformImages = (platformsInfo: PlatformsInfo[]): string[] => {

@@ -33,7 +33,7 @@ export const Card = component$<CardProps>(({ game }) => {
               />
             ))}
           </div>
-          <h3 class="text-2xl font-bold">{game.name}</h3>
+          <h3 class="text-2xl font-bold h-20">{game.name}</h3>
           <div class="hidden group-hover:block">
             <div class="flex justify-between py-2 border-b border-gray-600">
               <span class="text-[#FFFFFF66]">Release date:</span>
