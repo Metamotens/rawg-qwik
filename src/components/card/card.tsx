@@ -1,4 +1,5 @@
 import { component$ } from "@builder.io/qwik";
+import { getGamePlatformImages } from "~/helpers/game.helper";
 import type { Game } from "~/models/game";
 
 export interface CardProps {
@@ -13,11 +14,25 @@ export const Card = component$<CardProps>(({ game }) => {
           class="rounded-t-lg h-48"
           src={game.background_image}
           alt="game image"
+          loading="lazy"
           width={400}
           height={300}
         />
 
         <div class="p-3 text-xs">
+          <div class="flex flex-row py-2 space-x-1.5">
+            {getGamePlatformImages(game.platforms).map((slug) => (
+              <img
+                key={slug}
+                src={slug}
+                class="size-4"
+                alt="platform"
+                loading="lazy"
+                width={14}
+                height={14}
+              />
+            ))}
+          </div>
           <h3 class="text-2xl font-bold">{game.name}</h3>
           <div class="hidden group-hover:block">
             <div class="flex justify-between py-2 border-b border-gray-600">

@@ -13,7 +13,7 @@ export interface Game {
   playtime: number;
   suggestions_count: number;
   updated: string;
-  platforms: Platform[];
+  platforms: PlatformsInfo[];
   genres: Genre[];
 }
 
@@ -25,7 +25,12 @@ interface Genre {
   image_background: string;
 }
 
-interface Platform {
+export interface PlatformsInfo {
+  platform: Platform;
+  released_at: string;
+}
+
+export interface Platform {
   id: number;
   name: string;
   slug: string;
