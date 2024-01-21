@@ -14,7 +14,6 @@ import type { Game } from "~/models/game";
 export default component$(() => {
   const gamesContext = useContext<GameState>(GameContext);
 
-  // eslint-disable-next-line qwik/no-use-visible-task
   useTask$(async ({ track }) => {
     track(() => gamesContext.page);
     gamesContext.loading = true;

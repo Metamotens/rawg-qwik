@@ -1,17 +1,17 @@
 import type { PlatformsInfo } from "~/models/game";
 
 enum PlatformImage {
-    PC = 'icons/windows.svg',
-    XBOX = 'icons/xbox.svg',
-    PLAYSTATION = 'icons/playstation.svg',
-    MACOS = 'icons/macos.svg',
-    IOS = 'icons/ios.svg',
-    ANDROID = 'icons/android.svg',
-    NINTENDO = 'icons/nintendo-switch.svg',
-    LINUX = 'icons/linux.svg',
-    VITA = 'icons/vita.svg',
-    WEB = 'icons/web.svg',
-    WII = 'icons/wii.svg',
+    PC = './icons/windows.svg',
+    XBOX = './icons/xbox.svg',
+    PLAYSTATION = './icons/playstation.svg',
+    MACOS = './icons/macos.svg',
+    IOS = './icons/ios.svg',
+    ANDROID = './icons/android.svg',
+    NINTENDO = './icons/nintendo-switch.svg',
+    LINUX = './icons/linux.svg',
+    VITA = './icons/vita.svg',
+    WEB = './icons/web.svg',
+    WII = './icons/wii.svg',
 }
 
 export const getGamePlatformImages = (platformsInfo: PlatformsInfo[]): string[] => {

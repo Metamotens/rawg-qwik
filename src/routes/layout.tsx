@@ -19,10 +19,10 @@ export default component$(() => {
   return (
     <GameProvider>
       <Header />
-      <div class="flex flex-row pb-10">
+      <main class="flex flex-row pb-10">
         <Sidenav />
         <Slot />
-      </div>
+      </main>
     </GameProvider>
   );
 });
