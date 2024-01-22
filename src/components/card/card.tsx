@@ -35,7 +35,7 @@ export const Card = component$<CardProps>(({ game }) => {
             ))}
           </div>
           <div class="text-2xl font-bold h-20 hover:text-[#FFFFFF66] transition-color transition-all cursor-pointer">
-            <Link href={game.id.toString()}>{game.name}</Link>
+            <Link href={`/${game.id.toString()}`}>{game.name}</Link>
           </div>
 
           <div class="hidden group-hover:block">

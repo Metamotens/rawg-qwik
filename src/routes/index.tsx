@@ -56,7 +56,7 @@ export default component$(() => {
         <section class="flex flex-col w-full">
           <h1 class="text-7xl font-bold mb-2">New and trending</h1>
           <h3 class="mb-6">Based on player counts and release date</h3>
-          <div class="grid grid-cols-4 gap-6">
+          <div class="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-6">
             {games.map((game: Game) => (
               <Card key={game.id} game={game} />
             ))}

@@ -20,7 +20,7 @@ import Rpg from "/images/rpg.png";
 
 export const Sidenav = component$(() => {
   return (
-    <nav class="flex flex-row w-[250px]">
+    <nav class="flex flex-row w-[250px] md:block hidden">
       <ul class="space-y-5 mt-11">
         <li>
           <a

@@ -1,5 +1,5 @@
 import { Resource, component$ } from "@builder.io/qwik";
-import { Link, routeLoader$ } from "@builder.io/qwik-city";
+import { Link, routeLoader$, useLocation } from "@builder.io/qwik-city";
 import type { Game } from "~/models/game";
 
 export const useGameDetail = routeLoader$(async ({ env, params }) => {
@@ -7,11 +7,11 @@ export const useGameDetail = routeLoader$(async ({ env, params }) => {
     `https://api.rawg.io/api/games/${params.id}?key=${env.get("PUBLIC_API_KEY")}`
   );
   const data = await res.json();
-
   return data as Game;
 });
 
 export default component$(() => {
+  const loc = useLocation();
   const game = useGameDetail();
 
   return (
@@ -20,7 +20,7 @@ export default component$(() => {
       onPending={() => <div>loading..</div>}
       onResolved={(game: Game) => (
         <article class="flex flex-row relative w-full">
-          <Link href="/" class="pt-7 pl-4 cursor-pointer z-10">
+          <Link href={loc.prevUrl?.href} class="pt-7 pl-4 cursor-pointer z-10">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="icon icon-tabler icon-tabler-arrow-left"

@@ -1,13 +1,12 @@
 import { component$ } from "@builder.io/qwik";
+import { SearchForm } from "./search-form";
 
 import Bell from "/icons/bell.svg";
 import Plus from "/icons/plus.svg";
 import Dots from "/icons/dots.svg";
 import Search from "/icons/search.svg";
 
-export interface HeaderProps {}
-
-export const Header = component$<HeaderProps>(() => {
+export const Header = component$(() => {
   return (
     <header class="flex flew-row justify-between items-center w-full pt-7 pb-8">
       <span class="text-lg tracking-[5px] font-black pr-7">RAWG</span>
@@ -15,11 +14,7 @@ export const Header = component$<HeaderProps>(() => {
         <div class="absolute inset-y-0 start-1 flex items-center ps-3 pointer-events-none">
           <img src={Search} alt="bell" width={14} height={14} />
         </div>
-        <input
-          type="search"
-          placeholder="Search 861,608 games"
-          class="block w-full p-3 ps-10 text-sm outline-none text-gray-900 rounded-full bg-[#3b3b3b] hover:bg-white focus:bg-white transition-colors duration-300"
-        />
+        <SearchForm />
       </div>
       <div class="flex flew-row w-64 space-x-4 justify-end text-sm">
         <span class="cursor-pointer hover:underline">My library</span>
