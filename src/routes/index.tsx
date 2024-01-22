@@ -1,31 +1,42 @@
 import {
   $,
+  Resource,
   component$,
   useContext,
   useOnDocument,
   useTask$,
 } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import { routeLoader$, type DocumentHead } from "@builder.io/qwik-city";
 import { Card } from "~/components/card/card";
 import type { GameState } from "~/context/games.context";
 import { GameContext } from "~/context/games.context";
 import type { Game } from "~/models/game";
 
+export const useGames = routeLoader$(async ({ env }) => {
+  const res = await fetch(
+    `https://api.rawg.io/api/games?key=${env.get("PUBLIC_API_KEY")}`
+  );
+  const data = await res.json();
+  return data.results as Game[];
+});
+
 export default component$(() => {
+  const gamesLoader = useGames();
   const gamesContext = useContext<GameState>(GameContext);
+
+  useTask$(() => {
+    gamesContext.games.value = gamesLoader.value;
+  });
 
   useTask$(async ({ track }) => {
     track(() => gamesContext.page);
-    gamesContext.loading = true;
 
     const res = await fetch(
       `https://api.rawg.io/api/games?key=${import.meta.env.PUBLIC_API_KEY}&page=${gamesContext.page}&page_size=20`
     );
     const data = await res.json();
-    const games = [...gamesContext.games, ...(data.results as Game[])];
-
-    gamesContext.games = games;
-    gamesContext.loading = false;
+    const games = [...gamesContext.games.value, ...(data.results as Game[])];
+    gamesContext.games.value = games;
   });
 
   useOnDocument(
@@ -38,15 +49,21 @@ export default component$(() => {
   );
 
   return (
-    <section class="flex flex-col w-full">
-      <h1 class="text-7xl font-bold mb-2">New and trending</h1>
-      <h3 class="mb-6">Based on player counts and release date</h3>
-      <div class="grid grid-cols-4 gap-6">
-        {gamesContext.games.map((game) => (
-          <Card key={game.id} game={game} />
-        ))}
-      </div>
-    </section>
+    <Resource
+      value={gamesContext.games}
+      onPending={() => <div>loading..</div>}
+      onResolved={(games: Game[]) => (
+        <section class="flex flex-col w-full">
+          <h1 class="text-7xl font-bold mb-2">New and trending</h1>
+          <h3 class="mb-6">Based on player counts and release date</h3>
+          <div class="grid grid-cols-4 gap-6">
+            {games.map((game: Game) => (
+              <Card key={game.id} game={game} />
+            ))}
+          </div>
+        </section>
+      )}
+    />
   );
 });
 
